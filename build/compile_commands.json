@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/Users/VR/Documents/GitHub/DataCommu_PS1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/DCA1.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\DCA1.dir\\main.cpp.obj -c C:\\Users\\VR\\Documents\\GitHub\\DataCommu_PS1\\main.cpp",
+  "file": "C:/Users/VR/Documents/GitHub/DataCommu_PS1/main.cpp",
+  "output": "CMakeFiles/DCA1.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/VR/Documents/GitHub/DataCommu_PS1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/DCA1.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\DCA1.dir\\include\\pbPlots.cpp.obj -c C:\\Users\\VR\\Documents\\GitHub\\DataCommu_PS1\\include\\pbPlots.cpp",
+  "file": "C:/Users/VR/Documents/GitHub/DataCommu_PS1/include/pbPlots.cpp",
+  "output": "CMakeFiles/DCA1.dir/include/pbPlots.cpp.obj"
+},
+{
+  "directory": "C:/Users/VR/Documents/GitHub/DataCommu_PS1/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/DCA1.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\DCA1.dir\\include\\supportLib.cpp.obj -c C:\\Users\\VR\\Documents\\GitHub\\DataCommu_PS1\\include\\supportLib.cpp",
+  "file": "C:/Users/VR/Documents/GitHub/DataCommu_PS1/include/supportLib.cpp",
+  "output": "CMakeFiles/DCA1.dir/include/supportLib.cpp.obj"
+}
+]

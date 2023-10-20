@@ -1,0 +1,3 @@
+C:/Users/VR/Documents/GitHub/DataCommu_PS1/build/CMakeFiles/DCA1.dir
+C:/Users/VR/Documents/GitHub/DataCommu_PS1/build/CMakeFiles/edit_cache.dir
+C:/Users/VR/Documents/GitHub/DataCommu_PS1/build/CMakeFiles/rebuild_cache.dir
