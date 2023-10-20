@@ -58,6 +58,38 @@ void Manchester(vector<int> &bistream, vector<double> &xsp, vector<double> &ysp)
     }
 }
 
+void Settings(StringReference *errorMessage, RGBABitmapImageReference *imageReference, ScatterPlotSeries *series, ScatterPlotSettings *settings, vector<double> *xs, vector<double> *ys){
+    bool success;
+    series->xs = xs;
+    series->ys = ys;
+    series->linearInterpolation = true;
+    series->lineThickness = 2;
+    series->color = CreateRGBColor(1,0,0);
+
+    settings->width = 600;
+    settings->height = 400;
+    settings->title = toVector(L" ");
+    settings->xLabel = toVector(L"Time");
+    settings->yLabel = toVector(L"Pulse");
+    settings->yMin = -2.0f;
+    settings->yMax = 2.0f;
+    settings->showGrid = true;
+    settings->scatterPlotSeries->push_back(series);
+}
+
+void render(vector<double> &xs, vector<double> &ys, string str, int i){
+    StringReference * errorMessage = CreateStringReferenceLengthValue(0, L' ');
+    RGBABitmapImageReference * imageReference = CreateRGBABitmapImageReference();
+    ScatterPlotSeries *series = GetDefaultScatterPlotSeriesSettings();
+    ScatterPlotSettings *settings = GetDefaultScatterPlotSettings();
+    Settings(errorMessage, imageReference, series, settings, &xs, &ys);
+    bool success;
+    success = DrawScatterPlotFromSettings(imageReference, settings, errorMessage);
+    std::vector<double> *pngData = ConvertToPNG(imageReference->image);
+    WriteToFile(pngData, (str+to_string(i)+".png"));
+    DeleteImage(imageReference->image);
+}
+
 int main(){
     FILE * file = fopen("./Inputfile.txt", "r");
     if(file == NULL){
@@ -87,47 +119,21 @@ int main(){
     }
 
     //for test
-    vector<double> xs;
-    vector<double> ys;
     for(int i=0; i<binaryStreams.size(); i++){
-        for(int j=0; j<binaryStreams[i].size();j++){
-            printf("%d",binaryStreams[i][j]);
-        }
-        printf("\n");
+        vector<double> xs;
+        vector<double> ys;
+        Manchester(binaryStreams[i],xs, ys);
+        render(xs, ys, "Manchester_line", i);
+        printf("rendered Manchester line[%d]\n", i);
+        xs.clear();
+        ys.clear();
+        DiffManchester(binaryStreams[i],xs, ys);
+        render(xs, ys, "DifferentialManchester_line", i);
+        printf("rendered Differential Manchester line[%d]\n", i);
+
+        FreeAllocations();
     }
-    DiffManchester(binaryStreams[0],xs, ys);
 
-    bool success;
-    StringReference * errorMessage = CreateStringReferenceLengthValue(0, L' ');
-    RGBABitmapImageReference * imageReference = CreateRGBABitmapImageReference();
-
-    ScatterPlotSeries *series = GetDefaultScatterPlotSeriesSettings();
-    series->xs = &xs;
-    series->ys = &ys;
-    series->linearInterpolation = true;
-    series->lineThickness = 2;
-    series->color = CreateRGBColor(1,0,0);
-
-    ScatterPlotSettings *settings = GetDefaultScatterPlotSettings();
-    settings->width = 600;
-    settings->height = 400;
-    //settings->autoBoundaries = true;
-    //settings->autoPadding = true;
-    settings->title = toVector(L"Manchester Encoding");
-    settings->xLabel = toVector(L"Time");
-    settings->yLabel = toVector(L"Pulse");
-    settings->yMin = -2.0f;
-    settings->yMax = 2.0f;
-    settings->showGrid = true;
-    settings->scatterPlotSeries->push_back(series);
-    
-    success = DrawScatterPlotFromSettings(imageReference, settings, errorMessage);
-    
-    std::vector<double> *pngData = ConvertToPNG(imageReference->image);
-    WriteToFile(pngData, "Manchester.png");
-    DeleteImage(imageReference->image);
-
-    FreeAllocations();
 
     return 0;
 }
