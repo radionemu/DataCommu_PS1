@@ -26,7 +26,6 @@ void downTransition(vector<double> &xsp, vector<double> &ysp, size_t t){
     xsp.push_back((t+1)/2.0);
     ysp.push_back(-1.0);
     xsp.push_back((t+2)/2.0);
-    
 }
 
 void DiffManchester(vector<int> &bistream, vector<double> &xsp, vector<double> &ysp){
